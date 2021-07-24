@@ -5,7 +5,5 @@ int main()
 {
 	mainObject *sp1 = new mainObject();
 	sp1->processEvent(2);
-		
-	
 	return 0;
 }

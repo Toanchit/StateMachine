@@ -6,11 +6,9 @@ using namespace std;
 class ImainObject
 {
 	public : 
-	ImainObject();
-	 ~ImainObject();
-	void handleEventOnIdle();
-	void handleStateOnIdle()  ;
-	void handleEventOnRunning() ;
-	void handleStateOnRunning() ;
+	virtual void handleEventOnIdle() = 0;
+	virtual void handleStateOnIdle() = 0;
+	virtual void handleEventOnRunning() = 0;
+	virtual void handleStateOnRunning() = 0;
 };
 #endif

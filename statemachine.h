@@ -9,21 +9,18 @@ class statemachine
 public:
 	statemachine(ImainObject &sp) 
 	{
-		mstateIdle = new stateIdle(sp);
-		mstateRunning = new stateRunning(sp);
+		mstateIdle = std::make_shared<stateIdle>(sp);
+		mstateRunning = std::make_shared<stateRunning>(sp);
 		mCurrentState = mstateIdle;
 	}
-	~statemachine();
 	void processEvent(int t)
 	{
 		mCurrentState->processEvent(t);
 	}
-	void transferNextState(statebase next); 
 	class stateIdle : public statebase
 	{
 		public: 
 		stateIdle(ImainObject &sp): statebase(sp){} ;
-		virtual ~stateIdle();
 		void processEvent(int n)
 		{
 			if(n == 1)
@@ -49,7 +46,6 @@ public:
 		public:
 		stateRunning(ImainObject &sp): statebase(sp){
 		} ;
-		virtual ~stateRunning();
 		void processEvent(int n)
 		{
 			
@@ -64,8 +60,8 @@ public:
 		}
 	};
 private :  
-	stateIdle *mstateIdle;
-	stateRunning *mstateRunning;
-	statebase *mCurrentState;
+	std::shared_ptr<stateIdle> mstateIdle;
+	std::shared_ptr<stateRunning> mstateRunning;
+	std::shared_ptr<statebase> mCurrentState;
  };
  #endif

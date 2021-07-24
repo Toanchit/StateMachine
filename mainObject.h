@@ -13,10 +13,9 @@ class mainObject : public ImainObject
 		{
 			sp1 = new statemachine(*this);
 		}
-		~mainObject();
 		void processEvent(int n)
 		{
-			std::cout<<"Event = "<<n<<endl;
+			std::cout<<"Event = "<<n<<std::endl;
 			sp1->processEvent(n);
 		}
 		void handleEventOnIdle()

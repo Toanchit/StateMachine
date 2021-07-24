@@ -9,10 +9,9 @@ class statebase
 	ImainObject &mSp;
 	public:
 	statebase(ImainObject &sp) : mSp(sp) {};
-	virtual ~statebase();
-	virtual void processEvent(int t);
-	virtual void enter();
-	virtual void exit();
+	virtual void processEvent(int t) = 0;
+	virtual void enter() = 0;
+	virtual void exit() = 0;
 		
 };
 
