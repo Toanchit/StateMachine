@@ -3,7 +3,6 @@
 #include<iostream>
 #include "statebase.h"
 using namespace std;
-
 class statemachine
 {
 public:
@@ -15,30 +14,71 @@ public:
 	}
 	void processEvent(int t)
 	{
-		mCurrentState->processEvent(t);
+		if (mCurrentState->processEvent(t))
+		{
+			transferState();
+		}
+		else
+		{
+			std::cout << "Do transfer state" << std::endl;
+		}
+		
 	}
+
+	void transferState()
+	{
+		switch (mCurrentState->state)
+		{
+		case 1:
+		{
+			mCurrentState->exit();
+			mCurrentState = mstateIdle;
+			mCurrentState->enter();
+			break;
+		}
+		case 2:
+		{
+			mCurrentState->exit();
+			mCurrentState = mstateRunning;
+			mCurrentState->enter();
+			break;
+		}
+		default:
+			break;
+		}
+	}
+
 	class stateIdle : public statebase
 	{
 		public: 
 		stateIdle(ImainObject &sp): statebase(sp){} ;
-		void processEvent(int n)
+		bool processEvent(int n)
 		{
-			if(n == 1)
+			switch (n)
+			{
+			case 1 :
 			{
 				mSp.handleEventOnIdle();
+				return false;
 			}
-			if(n == 2)
+			case 2 :
 			{
 				mSp.handleStateOnIdle();
+				state = 2;
+				return true;
 			}
-		 } 
+			default:
+				return false;
+			}
+			
+		}
 		void enter()
 		{
-			cout<<"Enter to Idle state";
+			cout<<"Enter to Idle state"<<endl;
 			}	
 		void exit()
 		{
-			cout<<"exit from Idle state";
+			cout << "exit from Idle state" << endl;
 		}
 	};
 	class stateRunning : public statebase
@@ -46,20 +86,36 @@ public:
 		public:
 		stateRunning(ImainObject &sp): statebase(sp){
 		} ;
-		void processEvent(int n)
+		bool processEvent(int n)
 		{
+			switch (n)
+			{
+			case 3:
+			{
+				mSp.handleEventOnRunning();
+				return false;
+			}
+			case 4:
+			{
+				mSp.handleStateOnRunning();
+				state = 1;
+				return true;
+			}
+			default:
+				return false;
+			}
 			
 		 } 
 		void enter()
 		{
-			cout<<"Enter to Running state";
+			cout << "Enter to Running state" << endl;
 			}	
 		void exit()
 		{
-			cout<<"exit from Running state";
+			cout << "exit from Running state" << endl;
 		}
 	};
-private :  
+private : 
 	std::shared_ptr<stateIdle> mstateIdle;
 	std::shared_ptr<stateRunning> mstateRunning;
 	std::shared_ptr<statebase> mCurrentState;

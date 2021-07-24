@@ -20,19 +20,19 @@ class mainObject : public ImainObject
 		}
 		void handleEventOnIdle()
 		{
-			std::cout<<"Handle event on IDle";
+			std::cout<<"Handle event on IDle"<<endl;
 		}
 		void handleStateOnIdle() 
 		{
-			std::cout<<"Handle state in Idle";
+			std::cout<<"Handle state in Idle" << endl;
 		}
 		void handleEventOnRunning()
 		{
-			std::cout<<"Handle event on Running";
+			std::cout<<"Handle event on Running" << endl;
 		}
 		void handleStateOnRunning()
 		{
-			std::cout<<"Handle state on running";
+			std::cout<<"Handle state on running" << endl;
 		}
 } ;
 #endif

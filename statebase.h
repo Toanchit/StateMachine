@@ -5,11 +5,13 @@
 using namespace std;
 class statebase 
 {
-	protected:
+	public :
 	ImainObject &mSp;
+	int state =0;
 	public:
 	statebase(ImainObject &sp) : mSp(sp) {};
-	virtual void processEvent(int t) = 0;
+	virtual bool processEvent(int t) = 0;
+	
 	virtual void enter() = 0;
 	virtual void exit() = 0;
 		

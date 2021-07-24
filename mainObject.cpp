@@ -1,9 +1,13 @@
 #include "mainObject.h"
 #include "statemachine.h"
-using namespace std;
 int main()
 {
 	mainObject *sp1 = new mainObject();
-	sp1->processEvent(2);
-	return 0;
+	while (1)
+	{
+		int t;
+		std::cout << "action: " <<std::endl;
+		cin >> t;
+		sp1->processEvent(t);
+	}
 }
